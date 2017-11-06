@@ -1,0 +1,22 @@
+{
+  "name": "marquee",
+  "version": "1.0.0",
+  "description": "轻巧、无依赖的跑马灯 JavaScript 差插件\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[\u001b[\u001b[C\u001b[\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C",
+  "main": "marquee.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ReedSun/marquee.git"
+  },
+  "keywords": [
+    "marquee"
+  ],
+  "author": "ReedSun",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ReedSun/marquee/issues"
+  },
+  "homepage": "https://github.com/ReedSun/marquee#readme"
+}
