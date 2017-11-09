@@ -6,17 +6,38 @@ function dealCSS (obj) {
   return result.slice(0, -1)
 }
 
-const marquee = (config) => {
-  const el = config.el
-  const word = el.innerHTML
-  const winW = window.innerWidth
+function assertElement (ele) {
+	try {
+		ele.cloneNode(true)
+		if (ele.nodeType != 1 && ele.nodeType != 9) {
+      console.error(' `el` 不合法，不是 DOM 元素')
+			return false	
+		}		
+	} catch (e) {
+		console.error('`el` 不合法，不是 DOM 元素')
+    return false
+	}
+		return false
+}
 
+const marquee = (config) => {
+  const defaultConfig = {
+    el: null
+  }
+  config = Object.assign(defaultConfig, config)
+
+  // 进行 config 的类型判断
+  if (!assertElement(config.el)) {
+    return console.error('marquee 初始化失败')
+  }
+  
   // 清空内部内容
-  el.innerHTML = ''
+  const word = config.el.innerHTML
+  config.el.innerHTML = ''
 
   // 内部增加滚动容器
   let marqueeNode = document.createElement('div')
-  el.appendChild(marqueeNode)
+  config.el.appendChild(marqueeNode)
   marqueeNode.innerHTML = word
 
   // 设置滚动容器的样式
@@ -26,7 +47,7 @@ const marquee = (config) => {
   }))
 
   // 设置动画
-  el.innerHTML += `
+  config.el.innerHTML += `
     <style>
       @keyframes marqueeAnimation {
         100% {
@@ -37,9 +58,9 @@ const marquee = (config) => {
   `
 
   // 设置包裹 div 的样式
-  el.setAttribute('style', dealCSS({
+  config.el.setAttribute('style', dealCSS({
     width: '100000px',
-    'margin-left': `${winW}px`,
+    'margin-left': `${window.innerWidth}px`,
     animation: 'marqueeAnimation 5s linear 1s infinite'
   }))
 
