@@ -1,9 +1,9 @@
-function dealCSS (obj) {
+function addCSS (node, obj) {
   let result = ''
   for (var i in obj) {
     result += `${i}: ${obj[i]}; `
   }
-  return result.slice(0, -1)
+  node.setAttribute('style', result.slice(0, -1))
 }
 
 function assertElement (ele) {
@@ -41,10 +41,10 @@ const marquee = (config) => {
   marqueeNode.innerHTML = word
 
   // 设置滚动容器的样式
-  marqueeNode.setAttribute('style', dealCSS({
+  addCSS(marqueeNode, {
     float: 'left',
     'margin-right': 0
-  }))
+  })
 
   // 设置动画
   config.el.innerHTML += `
@@ -58,10 +58,9 @@ const marquee = (config) => {
   `
 
   // 设置包裹 div 的样式
-  config.el.setAttribute('style', dealCSS({
+  addCSS(config.el, {
     width: '100000px',
     'margin-left': `${window.innerWidth}px`,
     animation: 'marqueeAnimation 5s linear 1s infinite'
-  }))
-
+  })
 }
