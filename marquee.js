@@ -8,23 +8,39 @@ function dealCSS (obj) {
 
 const marquee = (config) => {
   const el = config.el
-  const word = el.innerText
-  console.log(word)
+  const word = el.innerHTML
+  const winW = window.innerWidth
 
-  el.innerHTML = `
-    <div style="margin-right: 0px; float: left;">${word}</div>
+  // 清空内部内容
+  el.innerHTML = ''
+
+  // 内部增加滚动容器
+  let marqueeNode = document.createElement('div')
+  el.appendChild(marqueeNode)
+  marqueeNode.innerHTML = word
+
+  // 设置滚动容器的样式
+  marqueeNode.setAttribute('style', dealCSS({
+    float: 'left',
+    'margin-right': 0
+  }))
+
+  // 设置动画
+  el.innerHTML += `
     <style>
-      @-webkit-keyframes marqueeAnimation {
+      @keyframes marqueeAnimation {
         100% {
-          margin-left:-960px
+          margin-left: -${marqueeNode.offsetWidth}px;
         }
       }
     </style>
   `
-  const wrapperCSS = {
+
+  // 设置包裹 div 的样式
+  el.setAttribute('style', dealCSS({
     width: '100000px',
-    'margin-left': '960px',
+    'margin-left': `${winW}px`,
     animation: 'marqueeAnimation 5s linear 1s infinite'
-  }
-  el.setAttribute('style', dealCSS(wrapperCSS))
+  }))
+
 }
