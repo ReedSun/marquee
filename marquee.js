@@ -17,7 +17,7 @@ function assertElement (ele) {
 		console.error('`el` 不合法，不是 DOM 元素')
     return false
 	}
-		return false
+		return true
 }
 
 const marquee = (config) => {
