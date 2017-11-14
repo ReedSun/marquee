@@ -21,7 +21,8 @@ function assertElement (ele) {
 const marquee = (config) => {
   const defaultConfig = {
     el: null,
-    delayTime: 1
+    delayTime: 1,
+    speed: 80
   }
   config = Object.assign(defaultConfig, config)
 
@@ -65,9 +66,10 @@ const marquee = (config) => {
   `
 
   // 设置包裹 div 的样式
+  const duringTime = (marqueeNode.offsetWidth + window.innerWidth) / config.speed
   addCSS(config.el, {
     width: '100000px',
     'margin-left': `${window.innerWidth}px`,
-    animation: `marqueeAnimation 5s linear ${config.delayTime}s infinite`
+    animation: `marqueeAnimation ${duringTime}s linear ${config.delayTime}s infinite`
   })
 }
