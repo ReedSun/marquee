@@ -10,11 +10,9 @@ function assertElement (ele) {
 	try {
 		ele.cloneNode(true)
 		if (ele.nodeType != 1 && ele.nodeType != 9) {
-      console.error(' `el` 不合法，不是 DOM 元素')
 			return false	
 		}		
 	} catch (e) {
-		console.error('`el` 不合法，不是 DOM 元素')
     return false
 	}
 		return true
@@ -22,12 +20,21 @@ function assertElement (ele) {
 
 const marquee = (config) => {
   const defaultConfig = {
-    el: null
+    el: null,
+    delayTime: 1
   }
   config = Object.assign(defaultConfig, config)
 
   // 进行 config 的类型判断
+  let error = false
   if (!assertElement(config.el)) {
+    console.warn('el 不是正确的元素类型')
+    error = true
+  } else if (isNaN(config.delayTime)) {
+    error = true
+    console.warn('dalayTime 不是正确的数字类型')
+  }
+  if (error) {
     return console.error('marquee 初始化失败')
   }
   
@@ -61,6 +68,6 @@ const marquee = (config) => {
   addCSS(config.el, {
     width: '100000px',
     'margin-left': `${window.innerWidth}px`,
-    animation: 'marqueeAnimation 5s linear 1s infinite'
+    animation: `marqueeAnimation 5s linear ${config.delayTime}s infinite`
   })
 }
